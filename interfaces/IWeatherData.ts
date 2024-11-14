@@ -1,10 +1,8 @@
 import type { WeatherTypes } from '@/constants/General';
 
 export interface IWeatherData {
-  location: {
-    country: string,
-    city: string,
-  },
+  location: string,
   temperature: number,
   type: WeatherTypes,
+  shortDescription: string,
 }

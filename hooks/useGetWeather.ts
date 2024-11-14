@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { API_KEY, WEATHER_API } from '@/constants/General';
+import { API_KEY, WEATHER_CURRENT_API } from '@/constants/General';
+import { useAppSelector } from '@/store/hooks/useApp';
+import selectCurrentUnits from '@/store/slices/general/selectors';
+import selectLocale from '@/store/slices/translates/selectors';
 import { parseWeatherData } from '@/utils/helpers';
 
 interface IUseGetWeather {
@@ -12,6 +15,9 @@ interface IUseGetWeather {
 export default function useGetWeather({ latitude, longitude } : IUseGetWeather) {
   const { t } = useTranslation();
 
+  const units = useAppSelector(selectCurrentUnits);
+  const language = useAppSelector(selectLocale);
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
@@ -20,7 +26,9 @@ export default function useGetWeather({ latitude, longitude } : IUseGetWeather) 
     setLoading(true);
 
     try {
-      const response = await fetch(`${WEATHER_API}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`);
+      const response = await fetch(
+        `${WEATHER_CURRENT_API}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=${units}&lang=${language}`,
+      );
       const result = await response.json();
 
       setData(result);
@@ -35,7 +43,7 @@ export default function useGetWeather({ latitude, longitude } : IUseGetWeather) 
     if (latitude && longitude) {
       getWeather();
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude, units, language]);
 
   return {
     data: parseWeatherData(data),

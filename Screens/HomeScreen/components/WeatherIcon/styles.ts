@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const getStyles = () => StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+  lottie: {
+    width: 200,
+    height: 200,
   },
 });
 

@@ -3,4 +3,6 @@ export default {
   errorDefaultMsg: 'Something went wrong',
   goToSettings: 'Go to settings',
   internalServerError: 'Internal server error',
+  language: 'Language',
+  units: 'Units',
 };

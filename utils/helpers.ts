@@ -1,21 +1,22 @@
+import dayjs from 'dayjs';
+
 import type { IWeatherData } from '@/interfaces/IWeatherData';
 
-export const parseWeatherLocationData = (location: string) => {
-  const country = location.split('/')[0];
-  const city = location.split('/')[1].replace('_', ' ');
+import Colors from '@/constants/Colors';
+import { WeatherTypes } from '@/constants/General';
+// Sun = 'Sun',
+//   Clear = 'Clear',
+//   Clouds = 'Clouds',
+//   Rain = 'Rain',
+export const parseWeatherData = (data: any): IWeatherData => ({
+  location: data.name,
+  temperature: data.main.temp,
+  type: data.weather[0].main,
+  shortDescription: data.weather[0].description,
+});
 
-  return { country, city };
-};
+export const formatDate = (date: number): string => dayjs(date * 1000).format('ddd ha');
 
-export const parseWeatherData = (data: any): IWeatherData => {
-  const { country, city } = parseWeatherLocationData(data.timezone);
-
-  return {
-    location: {
-      country,
-      city,
-    },
-    temperature: data.current.temp,
-    type: data.current.weather[0].main,
-  };
-};
+export const getTextColorsByWeatherType = (
+  type: WeatherTypes,
+) => ((type === WeatherTypes.Rain || type === WeatherTypes.Clear) ? Colors.dark.text : Colors.dark.info);

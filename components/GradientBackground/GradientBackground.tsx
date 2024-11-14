@@ -1,3 +1,4 @@
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import getStyles from './styles';
@@ -10,11 +11,13 @@ interface GradientBackgroundProps {
 }
 
 export default function GradientBackground({ weather, children }: GradientBackgroundProps) {
-  const styles = getStyles();
+  const { top } = useSafeAreaInsets();
+
+  const styles = getStyles({ top });
 
   // Gradient colors based on the weather
   const gradientColors = {
-    [WeatherTypes.Sun]: ['#FFDD89', '#FFB547'],
+    [WeatherTypes.Sun]: ['#FFDD89', '#FFC980'],
     [WeatherTypes.Clouds]: ['#D3D3D3', '#8E9EAB'],
     [WeatherTypes.Rain]: ['#4A5A6D', '#1C1F24'],
     [WeatherTypes.Clear]: ['#2C3E50', '#4CA1AF'],

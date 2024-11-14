@@ -3,4 +3,6 @@ export default {
   errorDefaultMsg: 'Щось пішло не так',
   goToSettings: 'Перейти до налаштувань',
   internalServerError: 'Внутрішня помилка сервера',
+  language: 'Мова',
+  units: 'Одиниці виміру',
 };

@@ -2,35 +2,43 @@ import { StyleSheet } from 'react-native';
 
 import type { WeatherTypes } from '@/constants/General';
 
+import Colors from '@/constants/Colors';
 import { getTextColorsByWeatherType } from '@/utils/helpers';
 
 const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    alignItems: 'center',
+    marginBottom: 'auto',
+    height: 150,
+    gap: 8,
   },
-  locationContainer: {
-    flexDirection: 'row',
+  itemContainer: {
+    backgroundColor: `${Colors.dark.info}10`,
+    borderRadius: 12,
+    padding: 4,
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-  countryTitle: {
-    fontSize: 30,
-    lineHeight: 30,
-    fontWeight: '700',
-    color: getTextColorsByWeatherType(type),
+    width: 90,
   },
   temperatureText: {
-    marginTop: 16,
-    fontSize: 84,
-    lineHeight: 84,
-    fontWeight: '700',
+    fontSize: 30,
+    lineHeight: 30,
+    fontWeight: '600',
     color: getTextColorsByWeatherType(type),
   },
-  shortDescriptionText: {
-    marginTop: 8,
-    fontSize: 20,
-    lineHeight: 20,
-    fontWeight: '600',
+  dateText: {
+    marginTop: 16,
+    fontSize: 16,
+    lineHeight: 16,
+    fontWeight: '400',
+    color: getTextColorsByWeatherType(type),
+  },
+  shortDescription: {
+    height: 28,
+    marginTop: 12,
+    fontSize: 12,
+    lineHeight: 14,
+    fontWeight: '400',
+    textAlign: 'center',
     textTransform: 'capitalize',
     color: getTextColorsByWeatherType(type),
   },

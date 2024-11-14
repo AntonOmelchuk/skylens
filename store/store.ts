@@ -12,6 +12,7 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
+import general from './slices/general/slice';
 import theme from './slices/theme/slice';
 import translates from './slices/translates/slice';
 
@@ -19,7 +20,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['theme', 'translates'],
+  whitelist: ['theme', 'translates', 'general'],
 };
 
 const persistedReducer = persistReducer(
@@ -27,6 +28,7 @@ const persistedReducer = persistReducer(
   combineReducers({
     theme,
     translates,
+    general,
   }),
 );
 

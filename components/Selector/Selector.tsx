@@ -3,39 +3,42 @@ import { FlatList, TouchableOpacity, View } from 'react-native';
 import getStyles from './styles';
 
 import AppText from '@/components/AppText/AppText';
-import LanguageList from '@/constants/LanguageList';
-import { useAppDispatch, useAppSelector } from '@/store/hooks/useApp';
+import { useAppSelector } from '@/store/hooks/useApp';
 import selectCurrentTheme from '@/store/slices/theme/selectors';
-import selectLocale from '@/store/slices/translates/selectors';
-import { setLocale } from '@/store/slices/translates/slice';
 
-function LanguageSelector() {
-  const dispatch = useAppDispatch();
+interface ISelector {
+  data: Array<{
+    id: number,
+    title: string,
+    value: string,
+  }>,
+  onClickHandler: (value: string) => void,
+  activeItem: string,
+}
+
+export default function Selector({ data, onClickHandler, activeItem }: ISelector) {
   const theme = useAppSelector(selectCurrentTheme);
   const styles = getStyles({ theme });
-  const locale = useAppSelector(selectLocale);
-
-  const onItemClick = (lng: string) => {
-    dispatch(setLocale(lng));
-  };
 
   return (
     <FlatList
-      data={LanguageList}
+      data={data}
+      style={{ flexGrow: 0 }}
       contentContainerStyle={styles.listContainer}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={
         ({ item }:any) => (
           <TouchableOpacity
             style={styles.itemContainer}
-            onPress={() => onItemClick(item?.value)}
+            onPress={() => onClickHandler(item?.value)}
           >
             <View style={{
               ...styles.item,
-              ...locale === item?.value && styles.itemActive,
+              ...activeItem === item?.value && styles.itemActive,
             }}
             />
             <AppText>
-              {item?.title}
+              {item.title}
             </AppText>
           </TouchableOpacity>
         )
@@ -43,5 +46,3 @@ function LanguageSelector() {
     />
   );
 }
-
-export default LanguageSelector;

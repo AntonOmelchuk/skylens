@@ -37,6 +37,7 @@ export default function TabLayout() {
         options={{
           headerShown: false,
           tabBarIcon: renderHomeIcon,
+          title: `${t('home.pageTitle')}`,
         }}
       />
       <Tabs.Screen
