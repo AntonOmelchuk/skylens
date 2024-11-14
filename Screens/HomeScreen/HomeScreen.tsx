@@ -1,54 +1,36 @@
-import { useCallback } from 'react';
-import { Linking, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 
+import DeniedPermission from './components/DeniedPermission/DeniedPermission';
+import WeatherInfo from './components/WeatherInfo/WeatherInfo';
 import getStyles from './styles';
 
-import AppText from '@/components/AppText/AppText';
-import Button, { ButtonTypes } from '@/components/Button/Button';
+import mockData from '@/__mocks__/weather_api_response';
+import Error from '@/components/Error/Error';
+import GradientBackground from '@/components/GradientBackground/GradientBackground';
 import Loader from '@/components/Loader/Loader';
 import useGetLocation from '@/hooks/useGetLocation';
-import { useAppSelector } from '@/store/hooks/useApp';
-import selectCurrentTheme from '@/store/slices/theme/selectors';
+import { parseWeatherData } from '@/utils/helpers';
 
 export default function HomeScreen() {
-  const { t } = useTranslation();
-
-  const theme = useAppSelector(selectCurrentTheme);
-  const styles = getStyles({ theme });
+  const styles = getStyles();
 
   const {
-    loading, location, error, isDenied,
+    loading, error, isDenied,
   } = useGetLocation();
 
-  const onButtonPressHandler = useCallback(() => {
-    Linking.openSettings();
-  }, []);
+  const parsedWeatherData = parseWeatherData(mockData);
 
   return (
     <View style={styles.container}>
-      {loading ? <Loader /> : (
-        <>
-          <AppText style={styles.infoText}>
-            {location || error}
-          </AppText>
-
-          {isDenied ? (
-            <View>
-              <AppText style={styles.infoText}>
-                {t('general.permissionDenied')}
-              </AppText>
-              <View style={styles.buttonWrapper}>
-                <Button
-                  title={t('general.goToSettings')}
-                  type={ButtonTypes.outline}
-                  onPress={onButtonPressHandler}
-                />
-              </View>
-            </View>
-          ) : null}
-        </>
-      )}
+      <GradientBackground weather={parsedWeatherData.type}>
+        {loading ? <Loader /> : (
+          <>
+            {parsedWeatherData ? <WeatherInfo weatherData={parsedWeatherData} /> : null}
+            {error ? <Error error={error} /> : null}
+            {isDenied ? <DeniedPermission /> : null}
+          </>
+        )}
+      </GradientBackground>
     </View>
   );
 }

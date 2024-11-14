@@ -8,6 +8,8 @@ import {
 import AppText from '../AppText/AppText';
 import getStyles from './styles';
 
+import type { StyleProp, ViewStyle } from 'react-native/types';
+
 import { useAppSelector } from '@/store/hooks/useApp';
 import selectCurrentTheme from '@/store/slices/theme/selectors';
 
@@ -24,6 +26,7 @@ export interface IButton {
   isLoading?: boolean,
   disabled?: boolean,
   type?: ButtonTypes,
+  style?: StyleProp<ViewStyle>,
 }
 
 export default function Button({
@@ -32,12 +35,13 @@ export default function Button({
   type = ButtonTypes.success,
   disabled = false,
   isLoading = false,
+  style,
 }: IButton) {
   const theme = useAppSelector(selectCurrentTheme);
   const styles = getStyles({ theme });
 
   return (
-    <View style={StyleSheet.flatten([styles.container])}>
+    <View style={StyleSheet.flatten([styles.container, style])}>
       <TouchableOpacity style={styles.wrapper} onPress={onPress} disabled={disabled || isLoading}>
         <View
           style={StyleSheet.flatten([

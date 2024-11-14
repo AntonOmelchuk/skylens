@@ -1,6 +1,7 @@
 import 'react-native-reanimated';
 
 import { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -29,7 +30,9 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <App />
+      <SafeAreaProvider>
+        <App />
+      </SafeAreaProvider>
     </Provider>
   );
 }

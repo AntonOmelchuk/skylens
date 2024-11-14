@@ -7,6 +7,7 @@ import AppSwitch from '@/components/AppSwitch/AppSwitch';
 import AppText from '@/components/AppText/AppText';
 import setColorScheme = Appearance.setColorScheme;
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import LanguageSelector from '@/components/LanguageSelector/LanguageSelector';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/useApp';
@@ -14,11 +15,15 @@ import selectCurrentTheme from '@/store/slices/theme/selectors';
 import { toggleTheme } from '@/store/slices/theme/slice';
 
 export default function SettingsScreen() {
+  const { top } = useSafeAreaInsets();
+
   const theme = useAppSelector(selectCurrentTheme);
   const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
+
   const [isEnabled, setIsEnabled] = useState(false);
-  const styles = getStyles({ theme });
+  const styles = getStyles({ theme, top });
 
   useEffect(() => {
     setColorScheme?.(isEnabled ? 'dark' : 'light');

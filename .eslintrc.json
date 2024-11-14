@@ -27,7 +27,8 @@
   ],
   "ignorePatterns": [
     "expo-env.d.ts",
-    "babel.config.js"
+    "babel.config.js",
+    "__mocks__"
   ],
   "rules": {
     "import/extensions": "off",

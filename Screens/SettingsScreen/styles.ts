@@ -4,12 +4,13 @@ import type { ColorSchemeName } from 'react-native/Libraries/Utilities/Appearanc
 
 import Colors from '@/constants/Colors';
 
-const getStyles = ({ theme }:{ theme?: ColorSchemeName }) => StyleSheet.create({
+const getStyles = ({ theme, top }:{ theme?: ColorSchemeName, top?: number }) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors[theme ?? 'light'].background,
     padding: 12,
     gap: 24,
+    paddingTop: top,
   },
   switchContainer: {
     flexDirection: 'row',

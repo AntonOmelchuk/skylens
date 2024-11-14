@@ -35,7 +35,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: `${t('home.pageTitle')}`,
+          headerShown: false,
           tabBarIcon: renderHomeIcon,
         }}
       />

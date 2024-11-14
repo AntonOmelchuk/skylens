@@ -26,7 +26,7 @@ export default function useGetLocation() {
         // Get current position
         const loc = await Location.getCurrentPositionAsync({});
         setLocation(JSON.stringify(loc));
-      } catch (e) {
+      } catch {
         setError(t('general.errorDefaultMsg'));
       } finally {
         setLoading(false);
@@ -35,7 +35,10 @@ export default function useGetLocation() {
   }, []);
 
   return {
-    location,
+    location: {
+      latitude: location ? JSON.parse(location).coords.latitude : null,
+      longitude: location ? JSON.parse(location).coords.longitude : null,
+    },
     loading,
     error,
     isDenied,
