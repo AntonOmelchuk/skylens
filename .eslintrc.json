@@ -36,7 +36,7 @@
         "code": 120,
         "ignorePattern": "^import"
     }],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/__tests__/**", "**/*.test.ts", "**/*.test.tsx"]}],
+    "import/no-extraneous-dependencies": "off",
      "require-explicit-generics/require-explicit-generics": [
         "error",
         ["builder.query", "builder.mutation"]
@@ -54,6 +54,7 @@
     "import/order": "off", // disable default import order rule to use simple-import-sort
     "radix": "off",
     "global-require": "off",
+    "react/require-default-props": "off",
     "react/jsx-props-no-spreading": ["error", {
       "exceptions": ["input", "**/*.stories.tsx"]
     }],
