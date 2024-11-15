@@ -30,6 +30,7 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
     fontSize: 16,
     lineHeight: 16,
     fontWeight: '400',
+    textTransform: 'capitalize',
     color: getTextColorsByWeatherType(type),
   },
   shortDescription: {

@@ -5,11 +5,9 @@ import getStyles from './styles';
 
 import type { WeatherTypes } from '@/constants/General';
 
-import { formatDate } from '@/utils/helpers';
-
 interface IForecastListItem {
   temperature: number,
-  date: number,
+  date: string,
   weatherType: WeatherTypes,
   currentWeather: WeatherTypes,
   shortDescription: string,
@@ -36,7 +34,7 @@ export default function ForecastListItem({
         {Math.round(temperature)}
         &#176;
       </Text>
-      <Text style={styles.dateText}>{formatDate(date)}</Text>
+      <Text style={styles.dateText}>{date}</Text>
       <Text style={styles.shortDescription}>{shortDescription}</Text>
     </View>
   );

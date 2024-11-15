@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import type { IWeatherData } from '@/interfaces/IWeatherData';
 
 import Colors from '@/constants/Colors';
+import dayjsLocaleUa from '@/constants/DayjsLocaleUA';
 import { WeatherTypes } from '@/constants/General';
 
 export const parseWeatherData = (data: any): IWeatherData => ({
@@ -23,7 +24,10 @@ export const parseWeatherData = (data: any): IWeatherData => ({
   },
 });
 
-export const formatDate = (date: number): string => dayjs(date * 1000).format('ddd ha');
+export const formatDate = (date: number, locale: string): string => {
+  dayjs.locale(locale === 'ua' ? dayjsLocaleUa as ILocale : locale);
+  return dayjs(date * 1000).format('ddd, HH:mm');
+};
 
 export const getTextColorsByWeatherType = (type: WeatherTypes) => {
   switch (type) {

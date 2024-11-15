@@ -8,6 +8,9 @@ import type { IForecastData } from '@/interfaces/IForecastData';
 
 import ListEmptyComponent from '@/components/List/ListEmptyComponent';
 import ListLoader from '@/components/List/ListLoader';
+import { useAppSelector } from '@/store/hooks/useApp';
+import selectLocale from '@/store/slices/translates/selectors';
+import { formatDate } from '@/utils/helpers';
 
 interface IForecastList {
   data: Array<IForecastData> | null,
@@ -16,6 +19,8 @@ interface IForecastList {
 }
 
 export default function ForecastList({ data, weatherType, loading }: IForecastList) {
+  const locale = useAppSelector(selectLocale);
+
   const styles = getStyles({ type: weatherType });
 
   return (
@@ -29,7 +34,7 @@ export default function ForecastList({ data, weatherType, loading }: IForecastLi
       renderItem={({ item }) => (
         <ForecastListItem
           temperature={item.main.temp}
-          date={item.dt}
+          date={formatDate(item.dt, locale)}
           weatherType={weatherType}
           currentWeather={item.weather[0].main}
           shortDescription={item.weather[0].description}
