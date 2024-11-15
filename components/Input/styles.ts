@@ -7,6 +7,7 @@ const getStyles = () => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 16,
   },
   input: {
     width: SCREEN_WIDTH - 32,

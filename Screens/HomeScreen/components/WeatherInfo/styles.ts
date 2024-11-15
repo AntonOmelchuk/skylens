@@ -36,7 +36,6 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
   },
   loader: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-
   },
 });
 

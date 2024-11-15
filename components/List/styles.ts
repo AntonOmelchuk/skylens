@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { SCREEN_WIDTH } from '@/constants/General';
+
 const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
@@ -8,7 +10,7 @@ const getStyles = () => StyleSheet.create({
     paddingVertical: 16,
   },
   loader: {
-    flex: 1,
+    width: SCREEN_WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,

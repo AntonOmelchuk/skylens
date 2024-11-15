@@ -7,11 +7,18 @@ interface IInput {
   placeholder: string,
   value: string,
   iconName: keyof typeof Ionicons.glyphMap,
+  disabled?: boolean,
   onChangeText: (text: string) => void,
+  onIconPress: () => void,
 }
 
 export default function Input({
-  placeholder, value, iconName, onChangeText,
+  placeholder,
+  value,
+  iconName,
+  disabled,
+  onChangeText,
+  onIconPress,
 }: IInput) {
   const styles = getStyles();
 
@@ -23,9 +30,9 @@ export default function Input({
         placeholderTextColor="lightgrey"
         value={value}
         onChangeText={onChangeText}
-
+        editable={!disabled}
       />
-      <TouchableOpacity style={styles.icon}>
+      <TouchableOpacity style={styles.icon} disabled={!value || disabled} onPress={onIconPress} activeOpacity={0.8}>
         <Ionicons name={iconName} size={20} color="black" />
       </TouchableOpacity>
     </View>

@@ -21,10 +21,11 @@ export default function GradientBackground({ weather, children }: GradientBackgr
     [WeatherTypes.Clouds]: ['#D3D3D3', '#8E9EAB'],
     [WeatherTypes.Rain]: ['#4A5A6D', '#1C1F24'],
     [WeatherTypes.Clear]: ['#2C3E50', '#4CA1AF'],
+    [WeatherTypes.Snow]: ['#E0EAFC', '#CFDEF3'],
   };
 
   // Determine colors based on the current weather
-  const colors = gradientColors[weather] || gradientColors[WeatherTypes.Sun]; // Default sunny
+  const colors = gradientColors[weather] || gradientColors[WeatherTypes.Clear]; // Default sunny
 
   return (
     <LinearGradient colors={colors} style={styles.container}>

@@ -1,6 +1,7 @@
 export const Colors = {
   light: {
     error: '#ffccc7',
+    errorDark: '#d32f2f',
     info: '#1b425b',
     text: '#11181C',
     background: '#fff',
@@ -17,9 +18,11 @@ export const Colors = {
     },
     buttonSuccessBg: '#31d1b1',
     buttonLabel: '#052e2a',
+    darkBlue: '#003366',
   },
   dark: {
     error: '#ffccc7',
+    errorDark: '#d32f2f',
     info: '#1b425b',
     text: '#ECEDEE',
     background: '#151718',
@@ -36,6 +39,7 @@ export const Colors = {
     },
     buttonSuccessBg: '#31d1b1',
     buttonLabel: '#052e2a',
+    darkBlue: '#003366',
   },
 };
 

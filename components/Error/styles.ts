@@ -5,6 +5,7 @@ const getStyles = () => StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
     textAlign: 'center',
+    textTransform: 'capitalize',
   },
 });
 

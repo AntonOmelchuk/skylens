@@ -10,6 +10,7 @@ import { WeatherTypes } from '@/constants/General';
 const sun = require('@/assets/lottie/sun.json');
 const cloud = require('@/assets/lottie/cloud.json');
 const rain = require('@/assets/lottie/rain.json');
+const snow = require('@/assets/lottie/snow.json');
 
 interface IWeatherIcon {
   type: WeatherTypes,
@@ -29,6 +30,8 @@ export default function WeatherIcon({ type, style }: IWeatherIcon) {
         return cloud;
       case WeatherTypes.Rain:
         return rain;
+      case WeatherTypes.Snow:
+        return snow;
       default:
         return sun;
     }

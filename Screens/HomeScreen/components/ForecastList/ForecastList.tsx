@@ -35,7 +35,7 @@ export default function ForecastList({ data, weatherType, loading }: IForecastLi
           shortDescription={item.weather[0].description}
         />
       )}
-      ListEmptyComponent={ListEmptyComponent}
+      ListEmptyComponent={<ListEmptyComponent isLoading={loading} />}
       ListFooterComponent={loading ? <ListLoader /> : null}
     />
   );
