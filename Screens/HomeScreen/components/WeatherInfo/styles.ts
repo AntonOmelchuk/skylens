@@ -37,6 +37,14 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
   loader: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
+  linkText: {
+    marginTop: 16,
+    fontSize: 16,
+    lineHeight: 20,
+    fontWeight: '600',
+    color: getTextColorsByWeatherType(type),
+    textDecorationLine: 'underline',
+  },
 });
 
 export default getStyles;

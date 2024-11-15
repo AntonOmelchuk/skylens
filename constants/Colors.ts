@@ -19,6 +19,8 @@ export const Colors = {
     buttonSuccessBg: '#31d1b1',
     buttonLabel: '#052e2a',
     darkBlue: '#003366',
+    cardBackground: '#f9f9f9',
+    shadow: '#000',
   },
   dark: {
     error: '#ffccc7',
@@ -40,6 +42,8 @@ export const Colors = {
     buttonSuccessBg: '#31d1b1',
     buttonLabel: '#052e2a',
     darkBlue: '#003366',
+    cardBackground: '#1a1a1a',
+    shadow: '#eee',
   },
 };
 

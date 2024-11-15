@@ -4,7 +4,7 @@ import { SCREEN_WIDTH } from '@/constants/General';
 
 const getStyles = () => StyleSheet.create({
   container: {
-    flex: 1,
+    width: SCREEN_WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 16,

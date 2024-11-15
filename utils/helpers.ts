@@ -11,6 +11,16 @@ export const parseWeatherData = (data: any): IWeatherData => ({
   temperature: data?.main.temp,
   type: data?.weather[0].main,
   shortDescription: data?.weather[0].description,
+  details: {
+    humidity: data?.main.humidity,
+    pressure: data?.main.pressure,
+    wind: data?.wind.speed,
+    sunrise: data?.sys.sunrise,
+    sunset: data?.sys.sunset,
+    feelsLike: data?.main.feels_like,
+    tempMin: data?.main.temp_min,
+    tempMax: data?.main.temp_max,
+  },
 });
 
 export const formatDate = (date: number): string => dayjs(date * 1000).format('ddd ha');

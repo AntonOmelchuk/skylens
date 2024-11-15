@@ -12,9 +12,10 @@ import { alert, parseWeatherData } from '@/utils/helpers';
 interface IUseGetWeather {
   latitude?: number,
   longitude?: number,
+  search?: string,
 }
 
-export default function useGetWeather({ latitude, longitude } : IUseGetWeather) {
+export default function useGetWeather({ latitude, longitude, search } : IUseGetWeather) {
   const units = useAppSelector(selectCurrentUnits);
   const language = useAppSelector(selectLocale);
 
@@ -58,8 +59,8 @@ export default function useGetWeather({ latitude, longitude } : IUseGetWeather) 
   };
 
   useEffect(() => {
-    if (latitude && longitude) {
-      getWeather();
+    if ((latitude && longitude) || search) {
+      getWeather(search);
     }
   }, [latitude, longitude, units, language]);
 

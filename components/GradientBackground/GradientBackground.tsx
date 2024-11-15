@@ -25,7 +25,7 @@ export default function GradientBackground({ weather, children }: GradientBackgr
   };
 
   // Determine colors based on the current weather
-  const colors = gradientColors[weather] || gradientColors[WeatherTypes.Clear]; // Default sunny
+  const colors = gradientColors[weather] || gradientColors[WeatherTypes.Clouds]; // Default to clouds
 
   return (
     <LinearGradient colors={colors} style={styles.container}>

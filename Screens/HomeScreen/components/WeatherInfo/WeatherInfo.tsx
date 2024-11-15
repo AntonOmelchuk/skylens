@@ -1,4 +1,5 @@
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import WeatherIcon from '../WeatherIcon/WeatherIcon';
 import getStyles from './styles';
@@ -10,12 +11,15 @@ import Loader from '@/components/Loader/Loader';
 interface IWeatherInfo {
   weatherData: IWeatherData,
   loading: boolean,
+  onPress?: () => void,
 }
 
-export default function WeatherInfo({ weatherData, loading }: IWeatherInfo) {
+export default function WeatherInfo({ weatherData, loading, onPress }: IWeatherInfo) {
   const {
     location, temperature, type, shortDescription,
   } = weatherData;
+
+  const { t } = useTranslation();
 
   const styles = getStyles({ type });
 
@@ -39,6 +43,10 @@ export default function WeatherInfo({ weatherData, loading }: IWeatherInfo) {
           <Text style={styles.shortDescriptionText}>
             {shortDescription}
           </Text>
+
+          <TouchableOpacity onPress={onPress}>
+            <Text style={styles.linkText}>{t('home.moreDetails')}</Text>
+          </TouchableOpacity>
         </>
       )}
     </View>
