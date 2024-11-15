@@ -8,6 +8,7 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     alignItems: 'center',
+
   },
   locationContainer: {
     flexDirection: 'row',

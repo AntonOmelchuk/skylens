@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 
 import general from './slices/general/slice';
+import searchResuts from './slices/searchResults/slice';
 import theme from './slices/theme/slice';
 import translates from './slices/translates/slice';
 
@@ -20,7 +21,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['theme', 'translates', 'general'],
+  whitelist: ['theme', 'translates', 'general', searchResuts],
 };
 
 const persistedReducer = persistReducer(
@@ -29,6 +30,7 @@ const persistedReducer = persistReducer(
     theme,
     translates,
     general,
+    searchResuts,
   }),
 );
 

@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WeatherDetails from '../WeatherDetails/WeatherDetails';
 import DeniedPermission from './components/DeniedPermission/DeniedPermission';
 import ForecastList from './components/ForecastList/ForecastList';
+import Results from './components/Results/Results';
 import WeatherInfo from './components/WeatherInfo/WeatherInfo';
 
 import type { BottomSheetRefProps } from '@/components/BottomSheet/BottomSheet';
@@ -19,13 +20,18 @@ import Loader from '@/components/Loader/Loader';
 import { SCREEN_HEIGHT } from '@/constants/General';
 import useGetLocation from '@/hooks/useGetLocation';
 import useGetWeather from '@/hooks/useGetWeather';
+import { useAppDispatch } from '@/store/hooks/useApp';
+import { addResult } from '@/store/slices/searchResults/slice';
 
 export default function HomeScreen() {
   const ref = useRef<BottomSheetRefProps>(null);
 
   const { top, bottom } = useSafeAreaInsets();
 
+  const dispatch = useAppDispatch();
+
   const [searchValue, setSearchValue] = useState<string>('');
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   const { t } = useTranslation();
 
@@ -47,6 +53,7 @@ export default function HomeScreen() {
 
   const onIconPressHandler = () => {
     if (searchValue.length > 2 && !loading && !weatherLoading) {
+      dispatch(addResult(searchValue));
       getWeather(searchValue);
     }
   };
@@ -72,8 +79,11 @@ export default function HomeScreen() {
               value={searchValue}
               onChangeText={onInputHandler}
               onIconPress={onIconPressHandler}
+              onFocus={() => setShowResults(true)}
+              onBlur={() => setShowResults(false)}
               disabled={loading || weatherLoading}
             />
+            {showResults ? <Results /> : null}
             {data?.location
               ? <WeatherInfo weatherData={data} loading={weatherLoading} onPress={onPressHandler} /> : null}
             {error ? <Error error={error} /> : null}

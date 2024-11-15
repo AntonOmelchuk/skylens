@@ -10,6 +10,8 @@ interface IInput {
   disabled?: boolean,
   onChangeText: (text: string) => void,
   onIconPress: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
 }
 
 export default function Input({
@@ -19,6 +21,8 @@ export default function Input({
   disabled,
   onChangeText,
   onIconPress,
+  onFocus,
+  onBlur,
 }: IInput) {
   const styles = getStyles();
 
@@ -31,6 +35,10 @@ export default function Input({
         value={value}
         onChangeText={onChangeText}
         editable={!disabled}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onSubmitEditing={onIconPress}
+        enterKeyHint="search"
       />
       <TouchableOpacity style={styles.icon} disabled={!value || disabled} onPress={onIconPress} activeOpacity={0.8}>
         <Ionicons name={iconName} size={20} color="black" />
