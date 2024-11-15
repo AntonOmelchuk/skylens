@@ -1,4 +1,4 @@
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Modal, View } from 'react-native';
 
 import getStyles from './styles';
 
@@ -12,8 +12,10 @@ export default function Loader({ style }: ILoader) {
   const styles = getStyles();
 
   return (
-    <View style={[styles.container, style]}>
-      <ActivityIndicator size="large" color="#fff" />
-    </View>
+    <Modal transparent>
+      <View style={[styles.container, style]}>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    </Modal>
   );
 }

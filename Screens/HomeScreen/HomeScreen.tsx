@@ -52,6 +52,7 @@ export default function HomeScreen() {
 
   const onIconPressHandler = () => {
     if (searchValue.length > 2 && !loading && !weatherLoading) {
+      setShowResults(false);
       addResult(searchValue);
       getWeather(searchValue);
     }
@@ -63,34 +64,33 @@ export default function HomeScreen() {
 
   return (
     <GradientBackground weather={data.type}>
+      {loading ? <Loader /> : null}
       <GestureHandlerRootView style={{ flex: 1 }}>
-        {loading ? <Loader /> : (
-          <ScrollView contentContainerStyle={{
-            flex: 1,
-            justifyContent: 'space-between',
-            paddingTop: top,
-            paddingBottom: bottom,
-          }}
-          >
-            <Input
-              placeholder={t('home.searchCity')}
-              iconName="search-outline"
-              value={searchValue}
-              onChangeText={onInputHandler}
-              onIconPress={onIconPressHandler}
-              onFocus={() => setShowResults(true)}
-              onBlur={() => setShowResults(false)}
-              disabled={loading || weatherLoading}
-            />
-            {showResults ? <Results /> : null}
-            {data?.location
-              ? <WeatherInfo weatherData={data} loading={weatherLoading} onPress={onPressHandler} /> : null}
-            {error ? <Error error={error} /> : null}
-            {(isDenied && !data?.location) ? <DeniedPermission /> : null}
+        <ScrollView contentContainerStyle={{
+          flex: 1,
+          justifyContent: 'space-between',
+          paddingTop: top,
+          paddingBottom: bottom,
+        }}
+        >
+          <Input
+            placeholder={t('home.searchCity')}
+            iconName="search-outline"
+            value={searchValue}
+            onChangeText={onInputHandler}
+            onIconPress={onIconPressHandler}
+            onFocus={() => setShowResults(true)}
+            onBlur={() => setShowResults(false)}
+            disabled={loading || weatherLoading}
+          />
+          {showResults ? <Results /> : null}
+          {data?.location
+            ? <WeatherInfo weatherData={data} loading={weatherLoading} onPress={onPressHandler} /> : null}
+          {error ? <Error error={error} /> : null}
+          {(isDenied && !data?.location) ? <DeniedPermission /> : null}
 
-            <ForecastList data={forecastData} loading={weatherLoading} weatherType={data.type} />
-          </ScrollView>
-        )}
+          <ForecastList data={forecastData} loading={weatherLoading} weatherType={data.type} />
+        </ScrollView>
         <BottomSheet ref={ref}>
           <WeatherDetails data={data.details} />
         </BottomSheet>

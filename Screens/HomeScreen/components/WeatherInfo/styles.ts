@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import type { WeatherTypes } from '@/constants/General';
-
+import { type WeatherTypes } from '@/constants/General';
 import { getTextColorsByWeatherType } from '@/utils/helpers';
 
 const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
@@ -36,7 +35,7 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
     color: getTextColorsByWeatherType(type),
   },
   loader: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   linkText: {
     marginTop: 16,
