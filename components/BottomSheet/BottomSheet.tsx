@@ -85,7 +85,9 @@ const BottomSheet = forwardRef<BottomSheetRefProps, BottomSheetProps>(({ childre
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
-        <View style={styles.line} />
+        <View style={styles.touchableArea}>
+          <View style={styles.line} />
+        </View>
         {children}
       </Animated.View>
     </GestureDetector>

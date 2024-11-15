@@ -29,8 +29,8 @@ export default function WeatherDetails({ data }: IWeatherDetailsProps) {
     <ScrollView contentContainerStyle={styles.container}>
 
       <DetailsItem title={t('home.humidity')} value={`${humidity}%`} />
-      <DetailsItem title={t('home.sunset')} value={dayjs(sunset, 'X').format('HH:mm')} />
-      <DetailsItem title={t('home.sunrise')} value={dayjs(sunrise, 'X').format('HH:mm')} />
+      <DetailsItem title={t('home.sunset')} value={dayjs(sunset * 1000).format('HH:mm')} />
+      <DetailsItem title={t('home.sunrise')} value={dayjs(sunrise * 1000).format('HH:mm')} />
       <DetailsItem title={t('home.pressure')} value={`${pressure} hPa`} />
       <DetailsItem title={t('home.wind')} value={`${wind} m/s`} />
       <DetailsItem title={t('home.feelsLike')} value={`${feelsLike}°`} />

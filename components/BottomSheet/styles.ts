@@ -7,8 +7,9 @@ import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants/General';
 
 const getStyles = ({ theme, top }:{ theme: ColorSchemeName, top: number }) => StyleSheet.create({
   bottomSheetContainer: {
-    height: SCREEN_HEIGHT - top,
+    height: SCREEN_HEIGHT - 32,
     width: SCREEN_WIDTH,
+    paddingTop: top,
     backgroundColor: Colors[theme ?? 'light'].background,
     position: 'absolute',
     zIndex: 100,
@@ -23,6 +24,11 @@ const getStyles = ({ theme, top }:{ theme: ColorSchemeName, top: number }) => St
     shadowOpacity: 0.1,
     shadowColor: 'black',
     elevation: 2,
+  },
+  touchableArea: {
+    height: 50,
+    width: '100%',
+    justifyContent: 'center',
   },
   line: {
     width: 150,
