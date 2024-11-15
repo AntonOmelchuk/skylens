@@ -2,16 +2,18 @@ import { ActivityIndicator, View } from 'react-native';
 
 import getStyles from './styles';
 
-import { useAppSelector } from '@/store/hooks/useApp';
-import selectCurrentTheme from '@/store/slices/theme/selectors';
+import type { ViewStyle } from 'react-native';
 
-export default function Loader() {
-  const theme = useAppSelector(selectCurrentTheme);
-  const styles = getStyles({ theme });
+interface ILoader {
+  style?: ViewStyle,
+}
+
+export default function Loader({ style }: ILoader) {
+  const styles = getStyles();
 
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" />
+    <View style={[styles.container, style]}>
+      <ActivityIndicator size="large" color="#fff" />
     </View>
   );
 }

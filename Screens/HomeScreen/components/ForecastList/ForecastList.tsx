@@ -6,12 +6,16 @@ import getStyles from './styles';
 import type { WeatherTypes } from '@/constants/General';
 import type { IForecastData } from '@/interfaces/IForecastData';
 
+import ListEmptyComponent from '@/components/List/ListEmptyComponent';
+import ListLoader from '@/components/List/ListLoader';
+
 interface IForecastList {
-  data: Array<IForecastData>,
+  data: Array<IForecastData> | null,
   weatherType: WeatherTypes,
+  loading: boolean,
 }
 
-export default function ForecastList({ data, weatherType }: IForecastList) {
+export default function ForecastList({ data, weatherType, loading }: IForecastList) {
   const styles = getStyles({ type: weatherType });
 
   return (
@@ -31,6 +35,8 @@ export default function ForecastList({ data, weatherType }: IForecastList) {
           shortDescription={item.weather[0].description}
         />
       )}
+      ListEmptyComponent={ListEmptyComponent}
+      ListFooterComponent={loading ? <ListLoader /> : null}
     />
   );
 }

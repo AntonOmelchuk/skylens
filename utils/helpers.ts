@@ -9,10 +9,10 @@ import { WeatherTypes } from '@/constants/General';
 //   Clouds = 'Clouds',
 //   Rain = 'Rain',
 export const parseWeatherData = (data: any): IWeatherData => ({
-  location: data.name,
-  temperature: data.main.temp,
-  type: data.weather[0].main,
-  shortDescription: data.weather[0].description,
+  location: data?.name,
+  temperature: data?.main.temp,
+  type: data?.weather[0].main,
+  shortDescription: data?.weather[0].description,
 });
 
 export const formatDate = (date: number): string => dayjs(date * 1000).format('ddd ha');

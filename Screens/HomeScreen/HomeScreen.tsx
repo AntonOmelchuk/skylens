@@ -1,42 +1,54 @@
-import { View } from 'react-native';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import DeniedPermission from './components/DeniedPermission/DeniedPermission';
 import ForecastList from './components/ForecastList/ForecastList';
 import WeatherInfo from './components/WeatherInfo/WeatherInfo';
-import getStyles from './styles';
 
-import type { IForecastData } from '@/interfaces/IForecastData';
-
-import mockForecastData from '@/__mocks__/forecast_api_response';
-import mockData from '@/__mocks__/weather_api_response';
 import Error from '@/components/Error/Error';
 import GradientBackground from '@/components/GradientBackground/GradientBackground';
+import Input from '@/components/Input/Input';
 import Loader from '@/components/Loader/Loader';
 import useGetLocation from '@/hooks/useGetLocation';
-import { parseWeatherData } from '@/utils/helpers';
+import useGetWeather from '@/hooks/useGetWeather';
 
 export default function HomeScreen() {
-  const styles = getStyles();
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const { t } = useTranslation();
 
   const {
-    loading, error, isDenied,
+    location, loading, error, isDenied,
   } = useGetLocation();
 
-  const parsedWeatherData = parseWeatherData(mockData);
+  const {
+    loading: weatherLoading, error: weatherError, data, forecastData,
+  } = useGetWeather({
+    latitude: location?.latitude,
+    longitude: location?.longitude,
+  });
+
+  const onInputHandler = (value: string) => {
+    setSearchValue(value);
+  };
 
   return (
-    <GradientBackground weather={parsedWeatherData.type}>
-      <View style={styles.container}>
-        {loading ? <Loader /> : (
-          <>
-            {parsedWeatherData ? <WeatherInfo weatherData={parsedWeatherData} /> : null}
-            {error ? <Error error={error} /> : null}
-            {isDenied ? <DeniedPermission /> : null}
+    <GradientBackground weather={data.type}>
+      {loading ? <Loader /> : (
+        <>
+          <Input
+            placeholder={t('home.searchCity')}
+            iconName="search-outline"
+            value={searchValue}
+            onChangeText={onInputHandler}
+          />
+          {data ? <WeatherInfo weatherData={data} loading={weatherLoading} /> : null}
+          {(error || weatherError) ? <Error error={error || weatherError} /> : null}
+          {isDenied ? <DeniedPermission /> : null}
 
-            <ForecastList data={mockForecastData.list as Array<IForecastData>} weatherType={parsedWeatherData.type} />
-          </>
-        )}
-      </View>
+          <ForecastList data={forecastData} loading={weatherLoading} weatherType={data.type} />
+        </>
+      )}
     </GradientBackground>
   );
 }

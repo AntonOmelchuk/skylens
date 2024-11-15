@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
 
-import type { ColorSchemeName } from 'react-native/Libraries/Utilities/Appearance';
-
-import Colors from '@/constants/Colors';
-
-const getStyles = ({ theme }:{ theme?: ColorSchemeName }) => StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors[theme ?? 'light'].background,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
   },
 });
 

@@ -34,6 +34,10 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
     textTransform: 'capitalize',
     color: getTextColorsByWeatherType(type),
   },
+  loader: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+
+  },
 });
 
 export default getStyles;

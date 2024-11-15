@@ -5,4 +5,5 @@ export default {
   internalServerError: 'Internal server error',
   language: 'Language',
   units: 'Units',
+  noResultsFound: 'No Results Found',
 };

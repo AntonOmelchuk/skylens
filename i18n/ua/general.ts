@@ -5,4 +5,5 @@ export default {
   internalServerError: 'Внутрішня помилка сервера',
   language: 'Мова',
   units: 'Одиниці виміру',
+  noResultsFound: 'Результатів не знайдено',
 };

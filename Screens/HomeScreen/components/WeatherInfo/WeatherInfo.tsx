@@ -5,11 +5,14 @@ import getStyles from './styles';
 
 import type { IWeatherData } from '@/interfaces/IWeatherData';
 
+import Loader from '@/components/Loader/Loader';
+
 interface IWeatherInfo {
   weatherData: IWeatherData,
+  loading: boolean,
 }
 
-export default function WeatherInfo({ weatherData }: IWeatherInfo) {
+export default function WeatherInfo({ weatherData, loading }: IWeatherInfo) {
   const {
     location, temperature, type, shortDescription,
   } = weatherData;
@@ -18,22 +21,26 @@ export default function WeatherInfo({ weatherData }: IWeatherInfo) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.locationContainer}>
-        <Text style={styles.countryTitle}>
-          {location}
-        </Text>
-      </View>
+      {loading ? <Loader style={styles.loader} /> : (
+        <>
+          <View style={styles.locationContainer}>
+            <Text style={styles.countryTitle}>
+              {location}
+            </Text>
+          </View>
 
-      <Text style={styles.temperatureText}>
-        {Math.round(temperature)}
-        &#176;
-      </Text>
+          <Text style={styles.temperatureText}>
+            {Math.round(temperature)}
+            &#176;
+          </Text>
 
-      <WeatherIcon type={type} />
+          <WeatherIcon type={type} />
 
-      <Text style={styles.shortDescriptionText}>
-        {shortDescription}
-      </Text>
+          <Text style={styles.shortDescriptionText}>
+            {shortDescription}
+          </Text>
+        </>
+      )}
     </View>
   );
 }
