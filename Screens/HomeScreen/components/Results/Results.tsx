@@ -4,7 +4,7 @@ import ResultsItem from './ResultsItem';
 import getStyles from './styles';
 
 import { useAppSelector } from '@/store/hooks/useApp';
-import selectResults from '@/store/slices/searchResults/selectors';
+import { selectResults } from '@/store/slices/searchResults/selectors';
 import selectCurrentTheme from '@/store/slices/theme/selectors';
 
 export default function Results() {

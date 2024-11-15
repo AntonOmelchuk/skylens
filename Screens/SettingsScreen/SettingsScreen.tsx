@@ -13,13 +13,11 @@ import Selector from '@/components/Selector/Selector';
 import Title from '@/components/Title/Title';
 import LanguageList from '@/constants/LanguageList';
 import UnitsList from '@/constants/UnitsList';
-import { useAppDispatch, useAppSelector } from '@/store/hooks/useApp';
+import useActions from '@/store/hooks/useActions';
+import { useAppSelector } from '@/store/hooks/useApp';
 import selectCurrentUnits from '@/store/slices/general/selectors';
-import { toggleUnits } from '@/store/slices/general/slice';
 import selectCurrentTheme from '@/store/slices/theme/selectors';
-import { toggleTheme } from '@/store/slices/theme/slice';
 import selectLocale from '@/store/slices/translates/selectors';
-import { setLocale } from '@/store/slices/translates/slice';
 
 export default function SettingsScreen() {
   const { top } = useSafeAreaInsets();
@@ -28,7 +26,7 @@ export default function SettingsScreen() {
   const units = useAppSelector(selectCurrentUnits);
   const locale = useAppSelector(selectLocale);
 
-  const dispatch = useAppDispatch();
+  const { toggleUnits, toggleTheme, setLocale } = useActions();
 
   const { t } = useTranslation();
 
@@ -40,11 +38,11 @@ export default function SettingsScreen() {
   }, [isEnabled]);
 
   const onClickUnitsHandler = useCallback(() => {
-    dispatch(toggleUnits());
+    toggleUnits();
   }, []);
 
   const onClickLocaleHandler = useCallback((lng: string) => {
-    dispatch(setLocale(lng));
+    setLocale(lng);
   }, []);
 
   return (
@@ -53,7 +51,7 @@ export default function SettingsScreen() {
         <AppSwitch
           toggleSwitch={(prop) => {
             setIsEnabled(prop);
-            dispatch(toggleTheme());
+            toggleTheme();
           }}
           isEnabled={theme === 'dark'}
         />

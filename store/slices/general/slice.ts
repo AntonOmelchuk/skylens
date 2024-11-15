@@ -19,6 +19,7 @@ const generalSlice = createSlice({
   },
 });
 
-export const { toggleUnits } = generalSlice.actions;
+export const { actions } = generalSlice;
+export const { toggleUnits } = actions;
 
 export default generalSlice.reducer;

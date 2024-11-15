@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import type { IForecastData } from '@/interfaces/IForecastData';
 
 import { API_KEY, FORECAST_API, WEATHER_CURRENT_API } from '@/constants/General';
+import useActions from '@/store/hooks/useActions';
 import { useAppSelector } from '@/store/hooks/useApp';
 import selectCurrentUnits from '@/store/slices/general/selectors';
+import { selectCurrentCity } from '@/store/slices/searchResults/selectors';
 import selectLocale from '@/store/slices/translates/selectors';
 import getErrorMsg from '@/utils/errors';
 import { alert, parseWeatherData } from '@/utils/helpers';
@@ -17,7 +19,10 @@ interface IUseGetWeather {
 
 export default function useGetWeather({ latitude, longitude, search } : IUseGetWeather) {
   const units = useAppSelector(selectCurrentUnits);
+  const currentCity = useAppSelector(selectCurrentCity);
   const language = useAppSelector(selectLocale);
+
+  const { setCurrentCity } = useActions();
 
   const [data, setData] = useState(null);
   const [forecastData, setForecastData] = useState<Array<IForecastData> | null>(null);
@@ -47,6 +52,7 @@ export default function useGetWeather({ latitude, longitude, search } : IUseGetW
 
       const forecastResult = await forecastResponse.json();
 
+      setCurrentCity(result.name);
       setData(result);
       setForecastData(forecastResult.list);
     } catch (e) {
@@ -60,7 +66,7 @@ export default function useGetWeather({ latitude, longitude, search } : IUseGetW
 
   useEffect(() => {
     if ((latitude && longitude) || search) {
-      getWeather(search);
+      getWeather(search || currentCity);
     }
   }, [latitude, longitude, units, language]);
 

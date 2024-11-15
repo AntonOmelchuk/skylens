@@ -12,16 +12,23 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 
-import general from './slices/general/slice';
-import searchResuts from './slices/searchResults/slice';
-import theme from './slices/theme/slice';
-import translates from './slices/translates/slice';
+import general, { actions as generalActions } from './slices/general/slice';
+import searchResults, { actions as searchResultsActions } from './slices/searchResults/slice';
+import theme, { actions as themeActions } from './slices/theme/slice';
+import translates, { setLocale } from './slices/translates/slice';
+
+export const rootActions = {
+  ...generalActions,
+  ...searchResultsActions,
+  ...themeActions,
+  setLocale,
+};
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['theme', 'translates', 'general', searchResuts],
+  whitelist: ['theme', 'translates', 'general', searchResults],
 };
 
 const persistedReducer = persistReducer(
@@ -30,7 +37,7 @@ const persistedReducer = persistReducer(
     theme,
     translates,
     general,
-    searchResuts,
+    searchResults,
   }),
 );
 

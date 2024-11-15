@@ -3,13 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import type ISearchResults from './interfaces/ISearchResults';
 
 export const initialState: ISearchResults = {
+  currentCity: '',
   results: [],
 };
 
 const searchResutsSlice = createSlice({
-  name: 'searchResuts',
+  name: 'searchResults',
   initialState,
   reducers: {
+    setCurrentCity: (state, action) => {
+      state.currentCity = action.payload;
+    },
     addResult: (state, action) => {
       const { results } = state;
       const { payload } = action;
@@ -29,6 +33,7 @@ const searchResutsSlice = createSlice({
   },
 });
 
-export const { addResult } = searchResutsSlice.actions;
+export const { actions } = searchResutsSlice;
+export const { setCurrentCity, addResult } = actions;
 
 export default searchResutsSlice.reducer;

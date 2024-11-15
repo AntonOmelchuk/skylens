@@ -20,15 +20,14 @@ import Loader from '@/components/Loader/Loader';
 import { SCREEN_HEIGHT } from '@/constants/General';
 import useGetLocation from '@/hooks/useGetLocation';
 import useGetWeather from '@/hooks/useGetWeather';
-import { useAppDispatch } from '@/store/hooks/useApp';
-import { addResult } from '@/store/slices/searchResults/slice';
+import useActions from '@/store/hooks/useActions';
 
 export default function HomeScreen() {
   const ref = useRef<BottomSheetRefProps>(null);
 
   const { top, bottom } = useSafeAreaInsets();
 
-  const dispatch = useAppDispatch();
+  const { addResult } = useActions();
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [showResults, setShowResults] = useState<boolean>(false);
@@ -53,7 +52,7 @@ export default function HomeScreen() {
 
   const onIconPressHandler = () => {
     if (searchValue.length > 2 && !loading && !weatherLoading) {
-      dispatch(addResult(searchValue));
+      addResult(searchValue);
       getWeather(searchValue);
     }
   };
