@@ -18,6 +18,8 @@ const searchResutsSlice = createSlice({
       const { results } = state;
       const { payload } = action;
 
+      if (payload.length < 2) return;
+
       const index = results.findIndex((result) => result === payload);
 
       if (index !== -1) {

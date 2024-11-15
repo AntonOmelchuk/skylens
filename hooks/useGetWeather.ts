@@ -22,7 +22,7 @@ export default function useGetWeather({ latitude, longitude, search } : IUseGetW
   const currentCity = useAppSelector(selectCurrentCity);
   const language = useAppSelector(selectLocale);
 
-  const { setCurrentCity } = useActions();
+  const { addResult } = useActions();
 
   const [data, setData] = useState(null);
   const [forecastData, setForecastData] = useState<Array<IForecastData> | null>(null);
@@ -52,9 +52,9 @@ export default function useGetWeather({ latitude, longitude, search } : IUseGetW
 
       const forecastResult = await forecastResponse.json();
 
-      setCurrentCity(result.name);
       setData(result);
       setForecastData(forecastResult.list);
+      addResult(result.name);
     } catch (e) {
       const errorMessage = getErrorMsg(e);
 
@@ -65,10 +65,10 @@ export default function useGetWeather({ latitude, longitude, search } : IUseGetW
   };
 
   useEffect(() => {
-    if ((latitude && longitude) || search) {
+    if ((latitude && longitude) || search || currentCity) {
       getWeather(search || currentCity);
     }
-  }, [latitude, longitude, units, language]);
+  }, [latitude, longitude, units, language, currentCity]);
 
   return {
     data: parseWeatherData(data),

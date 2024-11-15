@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import getStyles from './styles';
 
@@ -8,15 +8,18 @@ import selectCurrentTheme from '@/store/slices/theme/selectors';
 
 interface IResultsItem {
   result: string,
+  onPress: () => void,
 }
 
-export default function ResultsItem({ result }: IResultsItem) {
+export default function ResultsItem({ result, onPress }: IResultsItem) {
   const theme = useAppSelector(selectCurrentTheme);
   const styles = getStyles({ theme });
 
   return (
-    <View style={styles.itemContainer}>
-      <AppText style={styles.text}>{result}</AppText>
-    </View>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.2}>
+      <View style={styles.itemContainer}>
+        <AppText style={styles.text}>{result}</AppText>
+      </View>
+    </TouchableOpacity>
   );
 }

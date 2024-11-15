@@ -17,7 +17,7 @@ const getStyles = ({ type }: { type: WeatherTypes }) => StyleSheet.create({
     padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 90,
+    width: 100,
   },
   temperatureText: {
     fontSize: 30,

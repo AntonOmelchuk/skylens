@@ -11,7 +11,6 @@ interface IInput {
   onChangeText: (text: string) => void,
   onIconPress: () => void,
   onFocus?: () => void,
-  onBlur?: () => void,
 }
 
 export default function Input({
@@ -22,7 +21,6 @@ export default function Input({
   onChangeText,
   onIconPress,
   onFocus,
-  onBlur,
 }: IInput) {
   const styles = getStyles();
 
@@ -36,7 +34,6 @@ export default function Input({
         onChangeText={onChangeText}
         editable={!disabled}
         onFocus={onFocus}
-        onBlur={onBlur}
         onSubmitEditing={onIconPress}
         enterKeyHint="search"
       />
